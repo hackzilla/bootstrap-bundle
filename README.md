@@ -17,7 +17,7 @@ Add HackzillaBootstrapBundle in your composer.json:
 ```json
 {
     "require": {
-        "hackzilla/ticket-bundle": "~0.2",
+        "hackzilla/bootstrap-bundle": "~0.2",
     }
 }
 ```
