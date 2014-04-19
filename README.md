@@ -97,6 +97,9 @@ assetic:
           filters: [less,cssembed]
 ```
 
+- [Example base.html.twig](Resources/doc/base.html.twig)
+
+
 (Re)Generate bootstrap.js and bootstrap.css
 -------------------------------------------
 
