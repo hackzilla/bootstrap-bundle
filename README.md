@@ -6,7 +6,7 @@ Requirements
 
 * java
 * nodejs
-* cssembed [http://www.java2s.com/Code/Jar/c/cssembed.htm]
+* cssembed [https://github.com/nzakas/cssembed/downloads]
 * yuicompressor [https://github.com/yui/yuicompressor/downloads]
 
 Installation
