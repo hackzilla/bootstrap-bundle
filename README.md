@@ -110,4 +110,4 @@ Advanced usage
 
 Copy @HackzillaBootstrapBundle/Resources/less/compile.less and @HackzillaBootstrapBundle/Resources/less/variables.less to your own folder resources folder, and update your config.
 
-
+Alternatively copy @HackzillaBootstrapBundle/Resources/less/variables.less to /app/Resources/HackzillaBootstrapBundle/less/variables.less
