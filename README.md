@@ -12,6 +12,43 @@ Requirements
 Installation
 ------------
 
+Add HackzillaBootstrapBundle in your composer.json:
+
+```json
+{
+    "require": {
+        "hackzilla/ticket-bundle": "~0.2",
+    }
+}
+```
+
+Now tell composer to download the bundle by running the command:
+
+``` bash
+$ php composer.phar update hackzilla/bootstrap-bundle
+```
+
+Composer will install the bundle into your project's `vendor/hackzilla` directory.
+
+### Step 2: Enable the bundle
+
+Enable the bundle in the kernel:
+
+``` php
+<?php
+// app/AppKernel.php
+
+public function registerBundles()
+{
+    $bundles = array(
+        // ...
+        new Hackzilla\Bundle\BootstrapBundle\HackzillaBootstrapBundle(),
+        // ...
+        // Your application bundles
+    );
+}
+```
+
 Copy cssembed.jar, and yuicompressor.jar to /app/Resources/java/
 
 Add to config.yml
