@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% stylesheets output='bootstrap.css' combine=true
+        '@bootstrap_less' %}
+        <link href="{{ asset_url|replace({'/app_dev.php': ''}) }}" type="text/css" rel="stylesheet" >
+    {% endstylesheets %}
+  </head>
+
+  <body>
+    {% block body %}{% endblock %}
+
+    {% javascripts filter='?yui_js' combine=true output='bootstrap.js'
+       '@bootstrap_js' %}
+       <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+
+    {% block javascripts %}{% endblock %}
+  </body>
+</html>

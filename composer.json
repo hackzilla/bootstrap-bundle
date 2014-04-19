@@ -1,0 +1,21 @@
+{
+    "name": "hackzilla/bootstrap-bundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "description": "Bootstrap handler bundle",
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "twbs/bootstrap": "3.1.*,"
+    },
+    "autoload": {
+        "psr-0": {
+            "Hackzilla\\Bundle\\BootstrapBundle": ""
+        }
+    },
+    "target-dir": "Hackzilla/Bundle/BootstrapBundle"
+}

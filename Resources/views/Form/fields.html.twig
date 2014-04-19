@@ -1,0 +1,101 @@
+{% use 'form_div_layout.html.twig' %}
+
+{% block question2_widget %}
+{% spaceless %}
+    <div class="row">
+        <div class="col-md-3 col-lg-3">&nbsp;</div>
+        <div class="col-md-3 col-lg-3">Units</div>
+        <div class="col-md-3 col-lg-3">Economy</div>
+        <div class="col-md-3 col-lg-3">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-lg-3">{{ form_label(form.MeterSetupGas) }} Meter</div>
+        {{ form_row(form.MeterSetupGas) }}
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-lg-3">{{ form_label(form.MeterSetupElectricity) }} Meter</div>
+        {{ form_row(form.MeterSetupElectricity) }}
+    </div>
+
+    {{ form_errors(form.MeterSetupGas) }}
+    {{ form_errors(form.MeterSetupElectricity) }}
+
+    {{ form_row(form.save) }}
+{% endspaceless %}
+{% endblock %}
+
+{% block ofdan_meter_setup_row %}
+{% spaceless %}
+    {{ form_widget(form.id) }}
+    <div class="col-md-3 col-lg-3">{{ form_widget(form.unit) }}</div>
+    <div class="col-md-3 col-lg-3">
+        {%- if form.economyMeter is defined %}
+            {{ form_row(form.economyMeter) }}
+        {% else %}
+            &nbsp;
+        {% endif -%}
+    </div>
+    <div class="col-md-3 col-lg-3">{{ form_row(form.active) }}</div>
+{% endspaceless %}
+{% endblock %}
+
+{% block meter_readings_widget %}
+{% spaceless %}
+    <div class="row">
+        <div class="col-md-3 col-lg-3">{{ form_label(form.ReadingDate) }}</div>
+        <div class="col-md-3 col-lg-3">{{ form_widget(form.ReadingDate) }}</div>
+    </div>
+
+    <h3>Readings</h3>
+    {% if form.MeterReadingGas is defined %}
+    <div class="row">
+        <div class="col-md-3 col-lg-3">{{ form_label(form.MeterReadingGas) }}</div>
+        {{ form_row(form.MeterReadingGas) }}
+    </div>
+    {% endif %}
+    {% if form.MeterReadingElectricity is defined %}
+    <div class="row">
+        <div class="col-md-3 col-lg-3">{{ form_label(form.MeterReadingElectricity) }}</div>
+        {{ form_row(form.MeterReadingElectricity) }}
+    </div>
+    {% endif %}
+
+    {{ form_errors(form.ReadingDate) }}
+    {% if form.MeterReadingGas is defined %}
+        {{ form_errors(form.MeterReadingGas) }}
+    {% endif %}
+    {% if form.MeterReadingElectricity is defined %}
+        {{ form_errors(form.MeterReadingElectricity) }}
+    {% endif %}
+
+    {{ form_row(form.Save) }}
+{% endspaceless %}
+{% endblock %}
+
+{% block ofdan_meter_reading_gas_row %}
+{% spaceless %}
+    {{ form_widget(form.id) }}
+    <div class="col-md-3 col-lg-3">{{ form_widget(form.standardReading) }}</div>
+    <div class="col-md-3 col-lg-3">
+        {%- if form.economyMeter is defined %}
+            {{ form_row(form.economyMeter) }}
+        {% else %}
+            &nbsp;
+        {% endif -%}
+    </div>
+{% endspaceless %}
+{% endblock %}
+
+{% block ofdan_meter_reading_electricity_row %}
+{% spaceless %}
+    {{ form_widget(form.id) }}
+    <div class="col-md-3 col-lg-3">{{ form_widget(form.standardReading) }}</div>
+    <div class="col-md-3 col-lg-3">
+        {%- if form.economyReading is defined %}
+            {{ form_widget(form.economyReading) }}
+        {% else %}
+            &nbsp;
+        {% endif -%}
+    </div>
+{% endspaceless %}
+{% endblock %}
