@@ -1,101 +1,113 @@
 {% use 'form_div_layout.html.twig' %}
 
-{% block question2_widget %}
+{# for twitter bootstrap specifically #}
+{% block field_row %}
 {% spaceless %}
-    <div class="row">
-        <div class="col-md-3 col-lg-3">&nbsp;</div>
-        <div class="col-md-3 col-lg-3">Units</div>
-        <div class="col-md-3 col-lg-3">Economy</div>
-        <div class="col-md-3 col-lg-3">&nbsp;</div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 col-lg-3">{{ form_label(form.MeterSetupGas) }} Meter</div>
-        {{ form_row(form.MeterSetupGas) }}
-    </div>
-    <div class="row">
-        <div class="col-md-3 col-lg-3">{{ form_label(form.MeterSetupElectricity) }} Meter</div>
-        {{ form_row(form.MeterSetupElectricity) }}
-    </div>
-
-    {{ form_errors(form.MeterSetupGas) }}
-    {{ form_errors(form.MeterSetupElectricity) }}
-
-    {{ form_row(form.save) }}
-{% endspaceless %}
-{% endblock %}
-
-{% block ofdan_meter_setup_row %}
-{% spaceless %}
-    {{ form_widget(form.id) }}
-    <div class="col-md-3 col-lg-3">{{ form_widget(form.unit) }}</div>
-    <div class="col-md-3 col-lg-3">
-        {%- if form.economyMeter is defined %}
-            {{ form_row(form.economyMeter) }}
-        {% else %}
-            &nbsp;
-        {% endif -%}
-    </div>
-    <div class="col-md-3 col-lg-3">{{ form_row(form.active) }}</div>
-{% endspaceless %}
-{% endblock %}
-
-{% block meter_readings_widget %}
-{% spaceless %}
-    <div class="row">
-        <div class="col-md-3 col-lg-3">{{ form_label(form.ReadingDate) }}</div>
-        <div class="col-md-3 col-lg-3">{{ form_widget(form.ReadingDate) }}</div>
-    </div>
-
-    <h3>Readings</h3>
-    {% if form.MeterReadingGas is defined %}
-    <div class="row">
-        <div class="col-md-3 col-lg-3">{{ form_label(form.MeterReadingGas) }}</div>
-        {{ form_row(form.MeterReadingGas) }}
-    </div>
+<div class="{% if 'checkbox' in block_prefixes %}checkbox{% elseif 'radio' in block_prefixes %}radio{% else %}form-group{% endif %}{% if errors|length > 0 %} has-error{% endif %}">
+    {% if 'checkbox' not in block_prefixes and 'radio' not in block_prefixes %}
+        {{ form_label(form, label|default(null)) }}
     {% endif %}
-    {% if form.MeterReadingElectricity is defined %}
-    <div class="row">
-        <div class="col-md-3 col-lg-3">{{ form_label(form.MeterReadingElectricity) }}</div>
-        {{ form_row(form.MeterReadingElectricity) }}
+    <div class="controls">
+    {{ form_widget(form) }}
+    {{ form_errors(form)}}
     </div>
-    {% endif %}
-
-    {{ form_errors(form.ReadingDate) }}
-    {% if form.MeterReadingGas is defined %}
-        {{ form_errors(form.MeterReadingGas) }}
-    {% endif %}
-    {% if form.MeterReadingElectricity is defined %}
-        {{ form_errors(form.MeterReadingElectricity) }}
-    {% endif %}
-
-    {{ form_row(form.Save) }}
+</div>
 {% endspaceless %}
-{% endblock %}
+{% endblock field_row %}
 
-{% block ofdan_meter_reading_gas_row %}
+{% block form_row %}
 {% spaceless %}
-    {{ form_widget(form.id) }}
-    <div class="col-md-3 col-lg-3">{{ form_widget(form.standardReading) }}</div>
-    <div class="col-md-3 col-lg-3">
-        {%- if form.economyMeter is defined %}
-            {{ form_row(form.economyMeter) }}
-        {% else %}
-            &nbsp;
-        {% endif -%}
+<div class="{% if 'checkbox' in block_prefixes %}checkbox{% elseif 'radio' in block_prefixes %}radio{% else %}form-group{% endif %}{% if errors|length > 0 %} has-error{% endif %}">
+    {% if 'checkbox' not in block_prefixes and 'radio' not in block_prefixes %}
+        {{ form_label(form, label|default(null)) }}
+    {% endif %}
+    {{ form_widget(form) }}
+    {{ form_errors(form)}}
+</div>
+{% endspaceless %}
+{% endblock form_row %}
+
+{% block button_row %}
+{% spaceless %}
+    <div class="form-group">
+        {{ form_widget(form) }}
     </div>
+{% endspaceless %}
+{% endblock button_row %}
+
+
+{% block field_errors %}
+{% spaceless %}
+{% if errors|length > 0 %}
+
+{% for error in errors %}
+<div class="help-inline">
+{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
+</div>
+{% endfor %}
+
+{% endif %}
+{% endspaceless %}
+{% endblock field_errors %}
+
+{# special errors block for form errors - at the top of the form, for example #}
+{% block form_errors %}
+{% spaceless %}
+{% if errors|length > 0 %}
+<div class="alert has-error" style="display: inline-block;">
+{% for error in errors %}
+{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
+<br/>
+{% endfor %}
+</div>
+{% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
+{% block generic_label %}
+{% set attr = attr|merge({'class': ''}) %}
+{% spaceless %}
+{% if required %}
+{% set attr = attr|merge({'class': 'required'}) %}
+{% endif %}
+<label{% for attrname,attrvalue in attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>{{ label|trans }}</label>
 {% endspaceless %}
 {% endblock %}
 
-{% block ofdan_meter_reading_electricity_row %}
+{% block meter_reading_widget %}
+    {% set type = type|default('text') %}
+    <div class="input-group">
+      <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+      <span class="input-group-addon">{{ meter_unit }}</span>
+    </div>
+{% endblock %}
+
+{% block choice_widget_expanded %}
 {% spaceless %}
-    {{ form_widget(form.id) }}
-    <div class="col-md-3 col-lg-3">{{ form_widget(form.standardReading) }}</div>
-    <div class="col-md-3 col-lg-3">
-        {%- if form.economyReading is defined %}
-            {{ form_widget(form.economyReading) }}
-        {% else %}
-            &nbsp;
-        {% endif -%}
+    <div {{ block('widget_container_attributes') }}>
+    {% for child in form %}
+        {{ form_widget(child) }}
+    {% endfor %}
     </div>
 {% endspaceless %}
-{% endblock %}
+{% endblock choice_widget_expanded %}
+
+{% block checkbox_widget %}
+{% spaceless %}
+<label>
+    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    {{ label|trans }} {% if label is empty %}{{ name }}{% endif %}
+</label>
+{% endspaceless %}
+{% endblock checkbox_widget %}
+
+{% block radio_widget %}
+{% spaceless %}
+<label>
+    <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    {{ label|trans }} {% if label is empty %}{{ name }}{% endif %}
+</label>
+{% endspaceless %}
+{% endblock radio_widget %}
+
+{# end twitter bootstrap stuff #}
