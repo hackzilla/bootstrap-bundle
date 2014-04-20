@@ -74,13 +74,13 @@
 {% endspaceless %}
 {% endblock %}
 
-{% block meter_reading_widget %}
+{% block form_widget_simple %}
+{% spaceless %}
     {% set type = type|default('text') %}
-    <div class="input-group">
-      <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
-      <span class="input-group-addon">{{ meter_unit }}</span>
-    </div>
-{% endblock %}
+    {% set attr = attr|merge({'class': 'form-control'}) %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{% endspaceless %}
+{% endblock form_widget_simple %}
 
 {% block choice_widget_expanded %}
 {% spaceless %}
