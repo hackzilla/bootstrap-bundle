@@ -5,9 +5,19 @@ Requirements
 ------------
 
 * java
-* nodejs
+* nodejs (npm & less)
 * cssembed [https://github.com/nzakas/cssembed/downloads]
 * yuicompressor [https://github.com/yui/yuicompressor/downloads]
+
+System Setup
+------------
+
+For ubuntu, run the following commands to install necessary dependencies.
+
+```bash
+apt-get install java-common nodejs npm
+npm install -g less
+```
 
 Installation
 ------------
@@ -61,6 +71,13 @@ twig:
           - 'HackzillaBoostrapkBundle:Form:fields.html.twig'
 ```
 
+If nodejs path is different on your system, then update it here.
+
+Possible values are:
+* /usr/local/bin/node
+* /usr/bin/node
+* /usr/bin/nodejs
+
 ```yml
 # Assetic Configuration
 assetic:
@@ -98,6 +115,14 @@ assetic:
 ```
 
 - [Example base.html.twig](Resources/doc/base.html.twig)
+
+
+Fonts
+-----
+
+in web directory create symlink to the bootstrap fonts
+
+```ln -s  ../vendor/twbs/bootstrap/fonts```
 
 
 (Re)Generate bootstrap.js and bootstrap.css
