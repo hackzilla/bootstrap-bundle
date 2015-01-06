@@ -68,7 +68,7 @@ Add to config.yml
 twig:
     form:
         resources:
-          - 'HackzillaBoostrapkBundle:Form:fields.html.twig'
+          - 'HackzillaBoostrapBundle:Form:fields.html.twig'
 ```
 
 If nodejs path is different on your system, then update it here.
